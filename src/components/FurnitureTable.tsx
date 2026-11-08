@@ -18,7 +18,7 @@ const statusColors: Record<string, string> = {
   Ordered: 'bg-blue-100 text-blue-700',
   Shipped: 'bg-indigo-100 text-indigo-700',
   Delivered: 'bg-green-100 text-green-700',
-  Purchased: 'bg-emerald-100 text-emerald-700',
+  Purchased: 'bg-purple-100 text-purple-700',
   Returned: 'bg-red-100 text-red-700',
   Cancelled: 'bg-gray-200 text-gray-500',
 };
