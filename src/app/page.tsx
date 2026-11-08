@@ -10,6 +10,7 @@ import UpcomingDeliveries from '@/components/UpcomingDeliveries';
 
 interface Stats {
   totalSpent: number;
+  totalWithWishlist: number;
   totalItems: number;
   byStatus: Record<string, number>;
   byCategory: Record<string, number>;

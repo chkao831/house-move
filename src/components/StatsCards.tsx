@@ -4,6 +4,7 @@ import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveCo
 
 interface Stats {
   totalSpent: number;
+  totalWithWishlist: number;
   totalItems: number;
   byStatus: Record<string, number>;
   byCategory: Record<string, number>;
@@ -35,8 +36,8 @@ export default function StatsCards({ stats, loading }: StatsCardsProps) {
   if (loading) {
     return (
       <div className="space-y-6 mb-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {[1, 2, 3, 4].map(i => (
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+          {[1, 2, 3, 4, 5].map(i => (
             <div key={i} className="bg-white rounded-lg shadow p-4 animate-pulse">
               <div className="h-4 bg-gray-200 rounded w-1/2 mb-2"></div>
               <div className="h-8 bg-gray-200 rounded w-3/4"></div>
@@ -88,10 +89,15 @@ export default function StatsCards({ stats, loading }: StatsCardsProps) {
 
   return (
     <div className="space-y-6 mb-6">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
         <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-lg shadow-lg p-4 text-white">
           <p className="text-emerald-100 text-sm font-medium">Total Spent</p>
           <p className="text-2xl font-bold">£{stats.totalSpent.toLocaleString('en-GB', { minimumFractionDigits: 2 })}</p>
+        </div>
+        
+        <div className="bg-gradient-to-br from-teal-500 to-teal-600 rounded-lg shadow-lg p-4 text-white">
+          <p className="text-teal-100 text-sm font-medium">Incl. Wishlist</p>
+          <p className="text-2xl font-bold">£{stats.totalWithWishlist.toLocaleString('en-GB', { minimumFractionDigits: 2 })}</p>
         </div>
         
         <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg shadow-lg p-4 text-white">

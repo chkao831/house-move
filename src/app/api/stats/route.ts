@@ -11,6 +11,9 @@ export async function GET() {
       .filter(item => ['Purchased', 'Delivered', 'Ordered', 'Shipped'].includes(item.status))
       .reduce((sum, item) => sum + (item.price || 0), 0);
     
+    const totalWithWishlist = items
+      .reduce((sum, item) => sum + (item.price || 0), 0);
+    
     const totalItems = items.length;
     
     const byStatus: Record<string, number> = {};
@@ -32,6 +35,7 @@ export async function GET() {
     
     return NextResponse.json({
       totalSpent,
+      totalWithWishlist,
       totalItems,
       byStatus,
       byCategory,
