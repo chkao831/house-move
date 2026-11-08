@@ -18,11 +18,11 @@ export const CATEGORIES = [
   'Living Room',
   'Kitchen',
   'Bedroom',
-  'Bathroom',
-  'Office',
+  'Family Bathroom',
+  'En-Suite Bathroom',
   'Dining',
-  'Garden',
-  'General',
+  'Tools & Hardware',
+  'Common',
 ] as const;
 
 export const STATUSES = [

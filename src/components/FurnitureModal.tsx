@@ -14,7 +14,7 @@ const emptyItem: Partial<FurnitureItem> = {
   store: '',
   name: '',
   price: 0,
-  category: 'General',
+  category: 'Common',
   priority: 3,
   status: 'Wishlist',
   orderDate: '',
