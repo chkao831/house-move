@@ -21,6 +21,7 @@ export default function Home() {
   const [stats, setStats] = useState<Stats | null>(null);
   const [loading, setLoading] = useState(true);
   const [statsLoading, setStatsLoading] = useState(true);
+  const [dbError, setDbError] = useState(false);
 
   const [categoryFilter, setCategoryFilter] = useState('all');
   const [statusFilter, setStatusFilter] = useState('all');
@@ -42,9 +43,18 @@ export default function Home() {
 
       const res = await fetch(`/api/furniture?${params}`);
       const data = await res.json();
-      setItems(data);
+      if (data.error) {
+        console.error('Furniture API error:', data.error);
+        setDbError(true);
+        setItems([]);
+      } else {
+        setDbError(false);
+        setItems(Array.isArray(data) ? data : []);
+      }
     } catch (error) {
       console.error('Failed to fetch items:', error);
+      setDbError(true);
+      setItems([]);
     } finally {
       setLoading(false);
     }
@@ -55,9 +65,15 @@ export default function Home() {
     try {
       const res = await fetch('/api/stats');
       const data = await res.json();
-      setStats(data);
+      if (data.error) {
+        console.error('Stats API error:', data.error);
+        setStats(null);
+      } else {
+        setStats(data);
+      }
     } catch (error) {
       console.error('Failed to fetch stats:', error);
+      setStats(null);
     } finally {
       setStatsLoading(false);
     }
@@ -162,6 +178,21 @@ export default function Home() {
       </header>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {dbError && (
+          <div className="mb-6 bg-amber-50 border border-amber-200 rounded-lg p-4 flex items-start gap-3">
+            <svg className="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            <div>
+              <p className="font-medium text-amber-800">Database Connection Issue</p>
+              <p className="text-sm text-amber-700 mt-1">
+                Unable to connect to MongoDB. Please check that your IP is whitelisted in MongoDB Atlas 
+                (Network Access → Add IP Address) and that MONGODB_URI is correct.
+              </p>
+            </div>
+          </div>
+        )}
+
         <StatsCards stats={stats} loading={statsLoading} />
 
         <FilterBar

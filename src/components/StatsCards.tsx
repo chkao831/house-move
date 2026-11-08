@@ -28,7 +28,7 @@ export default function StatsCards({ stats, loading }: StatsCardsProps) {
     );
   }
 
-  if (!stats) return null;
+  if (!stats || !stats.byStatus) return null;
 
   const delivered = stats.byStatus['Delivered'] || 0;
   const pending = (stats.byStatus['Pending'] || 0) + (stats.byStatus['Ordered'] || 0) + (stats.byStatus['Shipped'] || 0);
