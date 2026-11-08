@@ -17,7 +17,8 @@ export interface FurnitureItem {
 export const CATEGORIES = [
   'Living Room',
   'Kitchen',
-  'Bedroom',
+  'Master Bedroom',
+  'Second Bedroom',
   'Family Bathroom',
   'En-Suite Bathroom',
   'Dining',
