@@ -22,7 +22,7 @@ const STATUS_COLORS: Record<string, string> = {
   Ordered: '#3B82F6',
   Shipped: '#6366F1',
   Delivered: '#10B981',
-  Purchased: '#059669',
+  Purchased: '#8B5CF6',
   Returned: '#EF4444',
   Cancelled: '#6B7280',
 };

@@ -6,6 +6,7 @@ import StatsCards from '@/components/StatsCards';
 import FilterBar from '@/components/FilterBar';
 import FurnitureTable from '@/components/FurnitureTable';
 import FurnitureModal from '@/components/FurnitureModal';
+import UpcomingDeliveries from '@/components/UpcomingDeliveries';
 
 interface Stats {
   totalSpent: number;
@@ -194,6 +195,8 @@ export default function Home() {
         )}
 
         <StatsCards stats={stats} loading={statsLoading} />
+
+        <UpcomingDeliveries items={items} loading={loading} />
 
         <FilterBar
           category={categoryFilter}
