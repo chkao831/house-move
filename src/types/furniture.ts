@@ -8,8 +8,17 @@ export interface FurnitureItem {
   status: string;
   orderDate: string;
   deliveryDate?: string;
+  deliveryTime?: string;
   link?: string;
   notes?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Memo {
+  _id?: string;
+  text: string;
+  completed: boolean;
   createdAt: string;
   updatedAt: string;
 }

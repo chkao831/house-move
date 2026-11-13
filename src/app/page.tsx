@@ -7,6 +7,7 @@ import FilterBar from '@/components/FilterBar';
 import FurnitureTable from '@/components/FurnitureTable';
 import FurnitureModal from '@/components/FurnitureModal';
 import UpcomingDeliveries from '@/components/UpcomingDeliveries';
+import Memos from '@/components/Memos';
 
 interface Stats {
   totalSpent: number;
@@ -218,6 +219,10 @@ export default function Home() {
           onEdit={handleEdit}
           onDelete={handleDelete}
         />
+
+        <div className="mt-6">
+          <Memos />
+        </div>
       </main>
 
       <FurnitureModal

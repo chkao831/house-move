@@ -19,6 +19,7 @@ const emptyItem: Partial<FurnitureItem> = {
   status: 'Wishlist',
   orderDate: '',
   deliveryDate: '',
+  deliveryTime: '',
   link: '',
   notes: '',
 };
@@ -33,6 +34,7 @@ export default function FurnitureModal({ isOpen, item, onClose, onSave }: Furnit
         ...item,
         orderDate: item.orderDate ? item.orderDate.split('T')[0] : '',
         deliveryDate: item.deliveryDate ? item.deliveryDate.split('T')[0] : '',
+        deliveryTime: item.deliveryTime || '',
       });
     } else {
       setFormData(emptyItem);
@@ -198,6 +200,18 @@ export default function FurnitureModal({ isOpen, item, onClose, onSave }: Furnit
                   type="date"
                   value={formData.deliveryDate || ''}
                   onChange={(e) => setFormData({ ...formData, deliveryDate: e.target.value })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Delivery Time (optional)
+                </label>
+                <input
+                  type="time"
+                  value={formData.deliveryTime || ''}
+                  onChange={(e) => setFormData({ ...formData, deliveryTime: e.target.value })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
