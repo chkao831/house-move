@@ -44,12 +44,18 @@ export default function UpcomingDeliveries({ items, loading }: UpcomingDeliverie
     })
     .sort((a, b) => new Date(a.deliveryDate!).getTime() - new Date(b.deliveryDate!).getTime());
 
+  const statusPriority: Record<string, number> = { 'Shipped': 1, 'Ordered': 2, 'Purchased': 3 };
+  
   const awaitingDeliveryDate = items
     .filter(item => {
       if (item.deliveryDate) return false;
       return ['Purchased', 'Shipped', 'Ordered'].includes(item.status);
     })
-    .sort((a, b) => new Date(b.orderDate || b.createdAt).getTime() - new Date(a.orderDate || a.createdAt).getTime());
+    .sort((a, b) => {
+      const priorityDiff = (statusPriority[a.status] || 99) - (statusPriority[b.status] || 99);
+      if (priorityDiff !== 0) return priorityDiff;
+      return new Date(b.orderDate || b.createdAt).getTime() - new Date(a.orderDate || a.createdAt).getTime();
+    });
 
   const formatDate = (dateStr: string, timeStr?: string) => {
     const date = new Date(dateStr);
