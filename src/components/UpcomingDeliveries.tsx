@@ -42,7 +42,18 @@ export default function UpcomingDeliveries({ items, loading }: UpcomingDeliverie
       deliveryDate.setHours(0, 0, 0, 0);
       return deliveryDate >= today;
     })
-    .sort((a, b) => new Date(a.deliveryDate!).getTime() - new Date(b.deliveryDate!).getTime());
+    .sort((a, b) => {
+      const dateA = new Date(a.deliveryDate!).getTime();
+      const dateB = new Date(b.deliveryDate!).getTime();
+      if (dateA !== dateB) return dateA - dateB;
+      
+      const timeToMinutes = (time?: string) => {
+        if (!time) return 9999;
+        const [hours, minutes] = time.split(':').map(Number);
+        return hours * 60 + minutes;
+      };
+      return timeToMinutes(a.deliveryTime) - timeToMinutes(b.deliveryTime);
+    });
 
   const statusPriority: Record<string, number> = { 'Shipped': 1, 'Ordered': 2, 'Purchased': 3 };
   
